@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 //const validator = require('validator');
 
-mongoose.connect('mongodb://127.0.0.1:27017',{
+mongoose.connect('mongodb+srv://taskapp:Seif2251997@task-manager-cluster.mbllo.mongodb.net/task_manager_api?retryWrites=true&w=majority',{
     useNewUrlParser:true,
     useCreateIndex:true,
     useUnifiedTopology: true,
