@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 //const validator = require('validator');
 
-mongoose.connect(process.env.MONGOOSE_API,{
+mongoose.connect('mongodb://127.0.0.1:27017',{
     useNewUrlParser:true,
     useCreateIndex:true,
     useUnifiedTopology: true,
