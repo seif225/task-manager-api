@@ -4,7 +4,7 @@ const User = require('../src/models/user.js')
 const mongodb = require('mongodb')
 const auth = require('../middleware/auth.js')
 const multer = require('multer')
-const sharp = require('sharp')
+//const sharp = require('sharp')
 const {sendWelcomeEmail}  = require('../src/emails/account.js')
 
 //sendWelcomeEmail('00','Masry')
@@ -56,52 +56,52 @@ router.post('/users' ,async (req , res)=>{
 
    
     //upload profile pics 
-    router.post('/users/me/avatar',auth ,upload.single('upload') , async (req,res)=>{
-       //console.log('main middleware')
-      const imageSource=  req.file.buffer;
-      const image = await sharp(imageSource).resize({width :250 , height:250}).png().toBuffer();
-        req.user.avatar = image
-       await req.user.save()
-        res.status(200).send()
-    },(error,req,res,next) =>{
-        //console.log('second middleware')
-        res.status(400).send({error : error.message})
-    })
+    // router.post('/users/me/avatar',auth ,upload.single('upload') , async (req,res)=>{
+    //    //console.log('main middleware')
+    //   const imageSource=  req.file.buffer;
+    //   const image = await sharp(imageSource).resize({width :250 , height:250}).png().toBuffer();
+    //     req.user.avatar = image
+    //    await req.user.save()
+    //     res.status(200).send()
+    // },(error,req,res,next) =>{
+    //     //console.log('second middleware')
+    //     res.status(400).send({error : error.message})
+    // })
 
-    //get profile pic by id
-    router.get('/users/:id/avatar',async (req,res)=>{
-        const userId = req.params.id;
-     try{
-            const user = await User.findById(userId)
-            if(!user || !user.avatar) {
-                throw new Error('this user image doesnt exit !' )
-            }
+    // //get profile pic by id
+    // router.get('/users/:id/avatar',async (req,res)=>{
+    //     const userId = req.params.id;
+    //  try{
+    //         const user = await User.findById(userId)
+    //         if(!user || !user.avatar) {
+    //             throw new Error('this user image doesnt exit !' )
+    //         }
 
-            res.set('Content-Type','image/png')
-            res.send(user.avatar)
-     }
-     catch(e){
-        res.send(e.message)
-     }
+    //         res.set('Content-Type','image/png')
+    //         res.send(user.avatar)
+    //  }
+    //  catch(e){
+    //     res.send(e.message)
+    //  }
 
-    })
+    // })
 
    
 
-    router.delete('/users/me/avatar',auth,async (req , res)=>{
-        try 
-        { req.user.avatar=undefined
-        await req.user.save()
-            res.status(200).send('deleted successfully')
-    }
-        catch(error){}
-        res.status(400).send({error : error.message})
-    })
+    // router.delete('/users/me/avatar',auth,async (req , res)=>{
+    //     try 
+    //     { req.user.avatar=undefined
+    //     await req.user.save()
+    //         res.status(200).send('deleted successfully')
+    // }
+    //     catch(error){}
+    //     res.status(400).send({error : error.message})
+    // })
     
     
-    router.get('/users/me',auth ,async (req , res)=>{
-     res.status(200).send(req.user)
-    }) 
+    // router.get('/users/me',auth ,async (req , res)=>{
+    //  res.status(200).send(req.user)
+    // }) 
     
     router.get('/users/:id' , async (req , res)=>{
         const id = req.params.id
