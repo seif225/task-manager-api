@@ -22,7 +22,7 @@ const db =client.db(databaseName);
 
 db.collection('users').deleteMany({
     age: {$lte:23}
-}).then((npmres)=>console.log(res)).catch((err)=>console.log(err))
+}).then((npmres)=>console.log(res)).catch((err)=>console.log(err));
 
 
 
